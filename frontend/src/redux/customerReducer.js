@@ -1,4 +1,4 @@
-//This is a reducer for the Products type.
+//This is a reducer for the Costumer type.
 //It will allow to asynchronously fetch data from the backend 
 
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
@@ -11,7 +11,7 @@ export const fetchCustomers = createAsyncThunk(
 
         let payload = []
 
-        await fetch("http://localhost:3000/customers", {mode:"cors"})
+        await fetch("http://localhost:5001/customers", {mode:"cors"})
         .then((response) => response.json() )
         .then((data) => {
             payload = data
@@ -29,7 +29,7 @@ export const fetchAddCustomer = createAsyncThunk(
 
         let payload = []
 
-        await fetch(`http://localhost:3000/add_customer`, {
+        await fetch(`http://localhost:5001/add_customer`, {
           mode:"cors", 
           method:"POST", 
           body: JSON.stringify(request_body),
@@ -66,7 +66,7 @@ const customerDataSlice = createSlice({
         })
         .addCase(fetchCustomers.fulfilled, (state, action) => {
           console.log("fetchCustomers complete:", action.payload)
-          state.customer = action.payload;
+          state.customers = action.payload;
         })
         .addCase(fetchCustomers.rejected, (state, action) => {
           console.log("error in extra reducers (fetchCustomers)");

@@ -14,8 +14,8 @@ import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
 
 //state management : 
 import { useDispatch, useSelector } from 'react-redux';
-// import { fetchProducts,fetchAddProduct } from '../redux/productReducer';
-import { fetchAddCustomer } from '../redux/customerReducer'
+import { fetchCustomers, fetchAddCustomer } from '../redux/customerReducer'
+import { useEffect } from 'react';
 
 import{
   FormLabel,
@@ -51,7 +51,7 @@ export default function AddValetCustomer() {
   const [tagNumber, setTagNumber] = useState("")
   const formComplete = (customerName && customerPhone && tagNumber)
 
-  function handleAddNewProduct(){
+  function handleAddNewCustomer(){
     
     let request_body = {
       "customerName" : customerName,
@@ -59,9 +59,11 @@ export default function AddValetCustomer() {
       "tagNumber" : tagNumber
     }
 
-    dispatch(fetchAddCustomer(request_body)) //to write the new product
-      // .then(()=>{console.log("dispatching after") 
-      // dispatch(fetchProducts())})
+    dispatch(fetchAddCustomer(request_body)) //to write the new customer
+      // .then(()=>{
+      //   console.log("dispatching after") 
+      //   dispatch(fetchCustomers())
+      // })
       .then(handleClose())
 
     console.log("details for new customer :", request_body)
@@ -135,9 +137,9 @@ export default function AddValetCustomer() {
             <Grid item xs={12} justifyContent="center" display="flex">
 
               {formComplete ? 
-              <Button type="submit" variant="contained" sx={{marginTop:"50px"}} onClick={handleAddNewProduct}>Add New Valet Customer</Button>
+              <Button type="submit" variant="contained" sx={{marginTop:"50px"}} onClick={handleAddNewCustomer}>Add New Valet Customer</Button>
               :
-              <Button disabled type="submit" variant="contained" sx={{marginTop:"50px"}} onClick={handleAddNewProduct}>Add New Valet Customer</Button>
+              <Button disabled type="submit" variant="contained" sx={{marginTop:"50px"}} onClick={handleAddNewCustomer}>Add New Valet Customer</Button>
               }
             </Grid>   
           </Grid>

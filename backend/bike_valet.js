@@ -6,7 +6,7 @@ var app = express();
 
 var path = require("path");
 const bodyParser = require('body-parser')
-var port = 3000;
+var port = 5001;
 
 const cors = require('cors');
 
@@ -32,4 +32,4 @@ app.use("/", require("./routes/delete"));
 
 app.listen(port);
 
-console.log('Store Experiment API server started on port : ' + port)
+console.log('Bike Valet Experiment API server started on port : ' + port)
