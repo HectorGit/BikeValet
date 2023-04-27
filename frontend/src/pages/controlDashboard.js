@@ -18,7 +18,6 @@ function ControlDashboard() {
       <AddValetCustomer />
       
       <Typography variant="h1"> CURRENTLY ACTIVE : </Typography>
-
       
       { customers.length > 0 &&
         customers.map((c) => {
