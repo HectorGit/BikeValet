@@ -45,9 +45,20 @@ postrouter.post("/add_customer",
 
 //TODO : Instead of using query, use req.body ( can test this on postman )
 
+//body requires tagNumber ***
 postrouter.post('/send-text', (req, res) => {
+
     //Welcome Message
     res.send('Hello to the Twilio Server')
+
+    tagNumber = req.body.tagNumber // pull this from the request_body
+
+    //Read in the customers data 
+    let rawdata = fs.readFileSync('customers_data.json');
+    let customers = JSON.parse(rawdata)
+
+    //find the customer that has this tagNumber //if no customer has this tagNumber... return error ?
+    filtered_customer = customers.filter( c=> c.tagNumber == tagNumber )[0] //ideally there would be no duplicates. 
 
     //_GET Variables
     const { recipient, textmessage } = req.query;
@@ -58,6 +69,7 @@ postrouter.post('/send-text', (req, res) => {
         to: recipient,  // Text this number
         from: process.env(TWILIO_PHONE_NUMBER) // From a valid Twilio number
     }).then((message) => console.log(message.body));
+
 })
 
 module.exports = postrouter;

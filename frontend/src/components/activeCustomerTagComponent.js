@@ -13,7 +13,13 @@ import FaceIcon from '@mui/icons-material/Face';
 import DoneIcon from '@mui/icons-material/Done';
 import SmsIcon from '@mui/icons-material/Sms';
 
+import { fetchSendTextToCustomer } from '../redux/customerReducer';
+
+import { useDispatch, useSelector } from 'react-redux';
+
 export default function ActiveCustomerTagComponent(props) {
+
+  const dispatch = useDispatch()
 
   const customer = props.customer 
 
@@ -23,6 +29,13 @@ export default function ActiveCustomerTagComponent(props) {
 
   function handleSendAboutToCloseMessage(){
     console.log('send message for tag number : ' + customer.tagNumber)
+
+    //body = 
+    request_body = {
+      "tagNumber":tagNumber
+    }
+
+    dispatch(fetchSendTextToCustomer(request_body))
   }
 
   return (

@@ -46,6 +46,31 @@ export const fetchAddCustomer = createAsyncThunk(
     }
 );
 
+/* POST */
+
+export const fetchSendTextToCustomer = createAsyncThunk(
+  "customer/fetchSendTextToCustomer",
+    async(request_body) => {
+
+        let payload = []
+
+        await fetch(`http://localhost:5001/send-text`, {
+          mode:"cors", 
+          method:"POST", 
+          body: JSON.stringify(request_body),
+          headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+          }    
+        })
+        .then((response) => response.json() )
+        .then((data) => {
+          payload = data
+        })
+        
+        return `completed fetchSendMessageToCustomer`
+    }
+);
+
 const customerDataSlice = createSlice({
   name: 'customer',
   initialState: {customers:[]},
