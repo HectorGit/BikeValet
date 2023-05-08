@@ -31,8 +31,8 @@ export default function ActiveCustomerTagComponent(props) {
     console.log('send message for tag number : ' + customer.tagNumber)
 
     //body = 
-    request_body = {
-      "tagNumber":tagNumber
+    let request_body = {
+      "tagNumber":customer.tagNumber
     }
 
     dispatch(fetchSendTextToCustomer(request_body))

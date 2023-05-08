@@ -63,7 +63,10 @@ postrouter.post('/send-text', (req, res) => {
     filtered_customer = customers.filter( c=> c.tagNumber == tagNumber )[0] //ideally there would be no duplicates. 
 
     //_GET Variables
-    const { recipient, textmessage } = req.query;
+    // const { recipient, textmessage } = req.query;
+
+    recipient = filtered_customer.customerPhone
+    textmessage = "It's almost time ! Please come pick up your bike at the Valet !"
 
     //Send Text
     client.messages.create({
