@@ -2,11 +2,13 @@ const express = require("express");
 const postrouter = express.Router();
 const fs = require('fs')
 require('dotenv').config()
+// require('twilio')
 
 //TWILIO RELATED VARIABLES : 
-const accountSid = process.env(TWILIO_ACCOUNT_SID)
-const authToken = process.env(TWILIO_AUTHTOKEN)
-const client = new twilio(accountSid, authToken);
+const accountSid = process.env.TWILIO_ACCOUNT_SID
+const authToken = process.env.TWILIO_AUTHTOKEN
+// const client = new twilio(accountSid, authToken);
+const client = require('twilio')(accountSid, authToken);
 
 // HOW TO ACCESS .env in node server? 
 
@@ -67,7 +69,7 @@ postrouter.post('/send-text', (req, res) => {
     client.messages.create({
         body: textmessage,
         to: recipient,  // Text this number
-        from: process.env(TWILIO_PHONE_NUMBER) // From a valid Twilio number
+        from: process.env.TWILIO_PHONE_NUMBER // From a valid Twilio number
     }).then((message) => console.log(message.body));
 
 })
